@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         垃圾博客屏蔽器
-// @namespace    https://www.kuro-x.com/
+// @namespace    https://github.com/Kur0x/RubbishBlogBlocker/
 // @version      0.1
 // @description  你可能是假博客的受害者
 // @author       KuroX
 // @match        http://blog.csdn.net/*
-// @match        https://github.com/Kur0x/microblog/issues/*
+// @match        https://github.com/Kur0x/RubbishBlogBlocker/issues/*
 // @grant        none
 // ==/UserScript==
 
@@ -16,13 +16,14 @@
 
 $(function(){
     var user_name = $("a.user_name").html();
-    //alert($("a.user_name").html()=="slvher");
-    $(".article_title").after("<h1 style=\"color:#FF0000\">这个博主已加入黑名单</h1>");
+    var black_list="#slvher#kingmicrosoft";
+    if(black_list.indexOf($("a.user_name").html()) > 0)
+        $(".article_title").after("<h2 style=\"color:#FF0000\">这个博主已加入黑名单</h2>");
 
     //$(".article_title").after("<a href=\"javascript:window.opener=null;window.open('','_self');window.close();\"><button>关闭当前网页</button></a>");
-    var reporturl="https://github.com/Kur0x/microblog/issues/new#" + user_name;
-    $(".article_title").after("<div><div style=\"width:50%;padding:0;margin:0;float:left;box-sizing:border-box;\"><a href=\""+reporturl+"\"><button>这TM就是垃圾！</button></a></div><div style=\"width:50%;padding:0;margin:0;float:left;box-sizing:border-box;\"><a href=\"javascript:window.opener=null;window.open('','_self');window.close();\"><button>关闭当前网页</button></a></div></div>");
-
+    var reporturl="https://github.com/Kur0x/RubbishBlogBlocker/issues/new#" + user_name;
+    $(".article_title").after("<div><span><a href=\""+reporturl+"\"><button id=\"button1\">我要报警！</button></a></span><span margin=><a href=\"javascript:window.opener=null;window.open('','_self');window.close();\"><button id=\"button2\">这TM就是垃圾！</button></a></span></div>");
+    //$(".article_title").after("<div><div style=\"width:50%;padding:0;margin:0;float:left;box-sizing:border-box;\"><a href=\""+reporturl+"\"><button id=\"button1\">我要报警！</button></a></div><div style=\"width:50%;padding:0;margin:0;float:left;box-sizing:border-box;\"><a href=\"javascript:window.opener=null;window.open('','_self');window.close();\"><button id=\"button2\">这TM就是垃圾！</button></a></div></div>");
 });
 
 $(function() {
@@ -31,6 +32,6 @@ $(function() {
         var code="反馈垃圾博客："+self.location.hash;
         document.getElementById("issue_title").value=code;
         //document.getElementById("submitBtn").click();
-
     }
 });
+
